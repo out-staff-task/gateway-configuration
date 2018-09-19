@@ -1,0 +1,25 @@
+eureka:
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      base-path: /info-api
+      exposure:
+        include: '*'
+        exclude: pause, resume, restart, shutdown
+
+spring:
+  rabbitmq:
+    host: salamander.rmq.cloudamqp.com
+    username: dfvkhzrk
+    virtual-host: dfvkhzrk
+    password: z0DHJZxoxCoI9GLeJzdkFfLZ7EVOkMsB
+  sleuth:
+    enabled: false
+  zipkin:
+    enabled: false
+

@@ -1,0 +1,35 @@
+info:
+  description: Gateway service API entry point
+
+server:
+  port: 8800
+
+zuul:
+  ignored-services: '*'
+  prefix: /api
+  routes:
+    justRedirect: 
+      path: /maps/**
+      url: http://www.google.com.ua/maps/@50.4487936,30.4963584,6z
+    simpleBoard:
+      path: /board/**
+      serviceId: catalog-service
+      stripPrefix: false
+
+hystrix:
+  command:
+    catalog-service:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+
+catalog-service:
+  ribbon:
+    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+    listOfServers: http://www.google.com.ua,http://localhost:8180/api/catalog
+    ConnectTimeout: 500
+    ReadTimeout: 2000
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 100
+
