@@ -7,7 +7,7 @@ management:
   endpoints:
     enabled-by-default: true
     web:
-#      base-path: /info-api
+      base-path: /info-api
       exposure:
         include: '*'
         exclude: pause, resume, restart, shutdown
